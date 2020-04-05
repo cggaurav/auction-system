@@ -20,7 +20,7 @@
 4. All timestamps move in strictly increasing order
 5. A bid can be valid even if the last bid price by the bidder is considered for a different item
 6. Two bids don't come at the same time, with the same or a different bidder.
-7. A bid is valid even if its bidding price is below the reserved price, however an item will never be sold below the reserved price. If this is the only bid for the item, the highest and lowest bid will be this same value and the bidder needs to pay the reserved price for the item.
+7. A bid is valid even if its bidding price is below the reserved price, however an item will never be sold below the reserved price. If this is the only bid for the item, the highest and lowest bid will be this same value and the item will not be sold.
 8. If there are no bids for an item, the highest and lowest bid price will be 0.00 and not 0
 9. If the user bids the same value again, even if if its for the same item, its considered a valid bid.
 

@@ -50,38 +50,38 @@ class Item:
         self.status = 'SOLD';
 
     def can_be_sold(self):
-        # Docs for sorting 
-        from functools import cmp_to_key
+        if self.get_number_of_bids() == 0:
+            return False
+        else:
+            # Docs for sorting 
+            from functools import cmp_to_key
 
-        def compare(bid1, bid2):
+            def compare(bid1, bid2):
 
-            if bid1.get_bidding_price() > bid2.get_bidding_price():
-                return -1
-            elif bid1.get_bidding_price() == bid2.get_bidding_price():
-                if bid1.get_bidding_time() > bid2.get_bidding_time(): # Note: Won't be equal, as assumed
+                if bid1.get_bidding_price() > bid2.get_bidding_price():
                     return -1
+                elif bid1.get_bidding_price() == bid2.get_bidding_price():
+                    if bid1.get_bidding_time() > bid2.get_bidding_time(): # Note: Won't be equal, as assumed
+                        return -1
+                    else:
+                        return 1
                 else:
                     return 1
+
+            # Sort all bids for item based on highest bid price to loweest bid price
+            self.bids.sort(key=cmp_to_key(compare))
+
+            # If the highest bid price is greater than the reserved price, item can be sold
+            if self.bids[0].get_bidding_price() >= self.get_reserved_price():
+                return True
             else:
-                return 1
-        
-        self.bids.sort(key=cmp_to_key(compare))
+                return False
 
-        if self.bids[0].get_bidding_price() >= self.get_reserved_price():
-            return True
-        else:
-            return False
-
-    # Take stock of item, to see if it can be sold based on current bids
+    # Take stock of item, to see if it can be sold based on current bids and auction end time
     def take_stock(self, time=float('inf')):
 
-        if self.is_not_sold() and time >= self.get_auction_end_time():
-            if self.get_number_of_bids() > 0:
-                if self.can_be_sold():
-                    self.set_as_sold()
-            else:
-                logging.info('Item has no bids unfortunately and time has passed', self.get_name())
-                pass
+        if self.is_not_sold() and time >= self.get_auction_end_time() and self.can_be_sold():
+            self.set_as_sold()
 
     def get_highest_bid_price(self):
         # Assumes, we have already taken stock of the item

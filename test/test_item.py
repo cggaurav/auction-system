@@ -94,7 +94,9 @@ def test_item_sale_with_two_bids():
 	assert item.get_lowest_bid_price() == 10
 	assert item.get_price_paid() == 0
 	assert item.get_winner() == ''
-
+	assert item.get_status() == 'UNSOLD'
+	assert item.is_not_sold() == True
+	
 	# Above reserved price
 	bid1 = Bid(1, 41, 66, item)
 	assert Bid.get_largest_bid_for_bidder(41) == 66
