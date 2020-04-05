@@ -8,6 +8,10 @@
 
 `make run-sample`
 
+OR
+
+`python run.py {path/to/input_file.txt}`
+
 ### Test
 
 `make test`
@@ -28,7 +32,7 @@
 
 1. Check if local environment is setup well to run python
 2. Break out bidder/seller into a user class
-3. Better validation, eg bids are non zero, items names are lowercase for uniqueness, etc
+3. Better validation, eg bids are non zero, items names are lowercase for uniqueness, auction end time is greater than start time, etc
 
 ## Notes
 
