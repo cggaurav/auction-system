@@ -59,17 +59,22 @@ class Auction:
 	def processOutput(self):
 		self.take_stock()
 
+		outputs = []
 		for item in self.items:
-			print(
-				item.get_auction_end_time(), '|',
-				item.get_name(), '|',
-				item.get_winner(), '|',
-				item.get_status(), '|',
-				"%.2f" % item.get_price_paid(), '|',
-				item.get_number_of_bids(), '|',
-				"%.2f" % item.get_highest_bid_price(), '|',
+			output = [
+				"%s" % item.get_auction_end_time(),
+				"%s" % item.get_name(),
+				"%s" % item.get_winner(),
+				"%s" % item.get_status(),
+				"%.2f" % item.get_price_paid(),
+				"%s" % item.get_number_of_bids(),
+				"%.2f" % item.get_highest_bid_price(),
 				"%.2f" % item.get_lowest_bid_price()
-			)
+			]
+			print("|".join(output))
+			outputs.append(output)
+
+		return outputs
 
 	def take_stock(self, time=float('inf')):
 		for item in self.items:

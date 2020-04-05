@@ -26,8 +26,9 @@
 
 ## Improvements
 
-1. Binary check if local environment is setup for python 3.x
-2. Perhaps we can break out bidder/seller into a user class
+1. Check if local environment is setup well to run python
+2. Break out bidder/seller into a user class
+3. Better validation, eg bids are non zero, items names are lowercase for uniqueness, etc
 
 ## Notes
 
