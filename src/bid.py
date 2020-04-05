@@ -1,5 +1,4 @@
 import logging
-from functools import cmp_to_key
 
 class Bid:
 	# Class Variable
@@ -14,8 +13,6 @@ class Bid:
 		if self.is_valid(item):
 			self.add_bid_for_bidder(self.get_bidder_id())
 			item.add_bid(self)
-		else:
-			logging.warning("Not a valid bid")
 
 
 	def get_bidding_price(self):
@@ -29,6 +26,8 @@ class Bid:
 
 	@classmethod
 	def get_largest_bid_for_bidder(cls, bidder_id):
+		# Docs for sorting 
+		from functools import cmp_to_key
 		def compare(bid1, bid2):
 		    return bid2.get_bidding_price() - bid1.get_bidding_price()
 

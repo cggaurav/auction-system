@@ -25,12 +25,12 @@ class Auction:
 				logging.error('Unknown input', command)
 
 	def processHeartBeat(self, command):
-		print('processHeartBeat', command)
+		# print('processHeartBeat', command)
 		time = int(command[0])
 		self.take_stock(time)
 
 	def processBid(self, command):
-		print('processBid', command) # eg ['12', '8', 'BID', 'toaster_1', '7.50']
+		# print('processBid', command) # eg ['12', '8', 'BID', 'toaster_1', '7.50']
 
 		item_name = command[3]
 
@@ -43,7 +43,7 @@ class Auction:
 		bid = Bid(bidding_time, bidder_id, bidding_price, item)
 
 	def processSell(self, command):
-		print('processSell', command) # eg ['10', '1', 'SELL', 'toaster_1', '10.00', '20']
+		# print('processSell', command) # eg ['10', '1', 'SELL', 'toaster_1', '10.00', '20']
 
 		auction_start_time = command[0]
 		seller_id = command[1]
@@ -67,7 +67,8 @@ class Auction:
 				"%.2f" % item.get_price_paid(), '|',
 				item.get_number_of_bids(), '|',
 				"%.2f" % item.get_highest_bid_price(), '|',
-				"%.2f" % item.get_lowest_bid_price())
+				"%.2f" % item.get_lowest_bid_price()
+			)
 
 	def take_stock(self, time=float('inf')):
 		for item in self.items:
@@ -77,10 +78,10 @@ class Auction:
 		self.items.append(item)
 
 	def get_item_by_name(self, name):
+		# Here return should end the function http://www.compciv.org/guides/python/fundamentals/function-definitions/
 		for item in self.items:
 			if item.get_name() == name:
 				break
-			# Here return should end the function http://www.compciv.org/guides/python/fundamentals/function-definitions/
 		return item
 
 

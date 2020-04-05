@@ -1,5 +1,4 @@
 from src.bid import Bid
-from functools import cmp_to_key
 # An item has a unique name and reserved price.
 # To buy an item, participants must submit bids with
 # a price higher than the reserved price.
@@ -47,8 +46,12 @@ class Item:
 	def add_bid(self, bid):
 		self.bids.append(bid)
 
-	def take_stock(self, time=float('inf')):
+	def can_be_sold(self):
+		# Docs for sorting 
+		from functools import cmp_to_key
+
 		def compare(bid1, bid2):
+
 			if bid1.get_bidding_price() > bid2.get_bidding_price():
 				return -1
 			elif bid1.get_bidding_price() == bid2.get_bidding_price():
@@ -58,13 +61,20 @@ class Item:
 					return 1
 			else:
 				return 1
+		
+		self.bids.sort(key=cmp_to_key(compare))
+
+		if self.bids[0].get_bidding_price() >= self.get_reserved_price():
+			return True
+		else:
+			return False
+
+
+	def take_stock(self, time=float('inf')):
 
 		if self.is_not_sold() and time >= self.get_auction_end_time():
 			if self.get_number_of_bids() > 0:
-				# Docs for sorting 
-				self.bids.sort(key=cmp_to_key(compare))
-
-				if self.bids[0].get_bidding_price() >= self.get_reserved_price():
+				if self.can_be_sold():
 					self.mark_sold()
 			else:
 				logging.info('Item has no bids unfortunately and time has passed', self)
