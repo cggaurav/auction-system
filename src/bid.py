@@ -1,4 +1,5 @@
 import logging
+from functools import cmp_to_key
 
 class Bid:
 	# Class Variable
@@ -6,9 +7,9 @@ class Bid:
 
 	def __init__(self, bidding_time, bidder_id, bidding_price, item):
 		# eg 17|8|BID|toaster_1|20.00
-		self.bidding_time = bidding_time
-		self.bidder_id = bidder_id
-		self.bidding_price = bidding_price
+		self.bidding_time = int(bidding_time)
+		self.bidder_id = int(bidder_id)
+		self.bidding_price = float(bidding_price)
 
 		if self.is_valid(item):
 			self.add_bid_for_bidder(self.get_bidder_id())
@@ -32,7 +33,7 @@ class Bid:
 		    return bid2.get_bidding_price() - bid1.get_bidding_price()
 
 		if bidder_id in cls.bids_by_bidder:
-			return (sorted(cls.bids_by_bidder[bidder_id], cmp=compare))[0].get_bidding_price()
+			return sorted(cls.bids_by_bidder[bidder_id], key=cmp_to_key(compare))[0].get_bidding_price()
 		else:
 			return 0.00
 		return

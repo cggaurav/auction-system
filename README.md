@@ -20,6 +20,7 @@
 5. A bid can be valid even if the last bid price by the bidder is considered for a different item
 6. Two bids don't come at the same time.
 7. A bid is valid even if its bidding price is below the reserved price, however the item will not be sold as it. If this is the only bid for the item, the highest and lowest bid will be this same value.
+8. If there are no bids for an item, the highest and lowest bid price will be 0.00
 
 ## Improvements
 

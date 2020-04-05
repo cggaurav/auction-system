@@ -1,4 +1,5 @@
 from src.bid import Bid
+from functools import cmp_to_key
 # An item has a unique name and reserved price.
 # To buy an item, participants must submit bids with
 # a price higher than the reserved price.
@@ -6,10 +7,10 @@ from src.bid import Bid
 class Item:
 	def __init__(self, auction_start_time, seller_id, name, reserved_price, auction_end_time):
 		self.name = name
-		self.reserved_price = reserved_price
-		self.seller_id = seller_id
-		self.auction_start_time = auction_start_time
-		self.auction_end_time = auction_end_time
+		self.reserved_price = float(reserved_price)
+		self.seller_id = int(seller_id)
+		self.auction_start_time = int(auction_start_time)
+		self.auction_end_time = int(auction_end_time)
 		
 		self.status = 'UNSOLD'
 
@@ -60,10 +61,10 @@ class Item:
 
 		if self.is_not_sold() and time >= self.get_auction_end_time():
 			if self.get_number_of_bids() > 0:
-				# TODO: Check
-				self.bids = sorted(self.bids, cmp=compare)
+				# Docs for sorting 
+				self.bids.sort(key=cmp_to_key(compare))
 
-				if self.bids[0].get_bidding_price() >= self.reserved_price():
+				if self.bids[0].get_bidding_price() >= self.get_reserved_price():
 					self.mark_sold()
 			else:
 				logging.info('Item has no bids unfortunately and time has passed', self)
@@ -85,15 +86,17 @@ class Item:
 	def get_price_paid(self):
 		# At the end of the auction the winner will pay the price of the second highest bidder, if there
 		# is only a single valid bid they will pay the reserve price of the auction.
-		if self.get_number_of_bids() == 0:
+		if self.is_not_sold():
 			return 0.00
-		if self.get_number_of_bids() == 1:
-			return self.get_reserved_price()
 		else:
-			return self.bids[1].get_bidding_price()
+			if self.get_number_of_bids() == 1:
+				return self.get_reserved_price()
+			else:
+				return self.bids[1].get_bidding_price()
 
 	def get_winner(self):
-		if self.get_number_of_bids() == 0:
+		if self.is_not_sold():
 			return ''
 		else:
 			return self.bids[0].get_bidder_id()
+			

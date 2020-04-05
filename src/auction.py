@@ -11,7 +11,7 @@ class Auction:
 
 	def processInput(self, lines):
 
-		commands = lines.split('\n')
+		commands = lines.strip().split('\n')
 		for command in commands:
 			command_delimited = command.strip().split('|')
 
@@ -34,9 +34,9 @@ class Auction:
 
 		item_name = command[3]
 
-		bidding_time = int(command[0])
-		bidder_id = int(command[1])
-		bidding_price = float(command[4])
+		bidding_time = command[0]
+		bidder_id = command[1]
+		bidding_price = command[4]
 
 		item = self.get_item_by_name(item_name)
 
@@ -45,11 +45,11 @@ class Auction:
 	def processSell(self, command):
 		print('processSell', command) # eg ['10', '1', 'SELL', 'toaster_1', '10.00', '20']
 
-		auction_start_time = int(command[0])
+		auction_start_time = command[0]
 		seller_id = command[1]
 		item_name = command[3]
-		reserved_price = float(command[4])
-		auction_end_time = int(command[5])
+		reserved_price = command[4]
+		auction_end_time = command[5]
 
 		item = Item(auction_start_time, seller_id, item_name, reserved_price, auction_end_time)
 
@@ -59,8 +59,15 @@ class Auction:
 		self.take_stock()
 
 		for item in self.items:
-			print(item.get_auction_end_time(), '|', item.get_name(), '|', item.get_winner(), '|', item.get_status(), '|',
-				item.get_price_paid(), '|', item.get_number_of_bids(), '|', item.get_highest_bid_price(), '|', item.get_lowest_bid_price())
+			print(
+				item.get_auction_end_time(), '|',
+				item.get_name(), '|',
+				item.get_winner(), '|',
+				item.get_status(), '|',
+				"%.2f" % item.get_price_paid(), '|',
+				item.get_number_of_bids(), '|',
+				"%.2f" % item.get_highest_bid_price(), '|',
+				"%.2f" % item.get_lowest_bid_price())
 
 	def take_stock(self, time=float('inf')):
 		for item in self.items:
