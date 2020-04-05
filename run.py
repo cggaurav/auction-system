@@ -3,11 +3,7 @@ import logging
 
 from src.auction import Auction
 
-
 def run():
-    """
-    Bootstraps the application.
-    """
     input_file_path = sys.argv[1] if len(sys.argv) > 1 else None
     if input_file_path:
         try:
@@ -16,8 +12,14 @@ def run():
             logging.error("No such file: {}".format(input_file_path))
 
         input_file_commands = input_file.read()
-        Auction.processCommands(input_file_commands)
         input_file.close()
+
+        # Lets start the auction
+        Auction.processInput(input_file_commands)
+
+        # After auction is completely done
+        Auction.processOutput()
+
     else:
     	logging.error("Give an input file to start off with.")
 
