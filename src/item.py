@@ -53,15 +53,18 @@ class Item:
 			elif bid1.get_bidding_price() == bid2.get_bidding_price():
 				if bid1.get_bidding_time() > bid2.get_bidding_time(): # Note: Won't be equal, as assumed
 					return -1
-				else
+				else:
 					return 1
-			else
+			else:
 				return 1
 
 		if self.is_not_sold() and time >= self.get_auction_end_time():
 			if self.get_number_of_bids() > 0:
-				sorted(self.bids, cmp=compare)
-				self.mark_sold()
+				# TODO: Check
+				self.bids = sorted(self.bids, cmp=compare)
+
+				if self.bids[0].get_bidding_price() >= self.reserved_price():
+					self.mark_sold()
 			else:
 				logging.info('Item has no bids unfortunately and time has passed', self)
 
@@ -69,14 +72,14 @@ class Item:
 		# Assumes, we have already taken stock of the item
 		if self.get_number_of_bids() == 0:
 			return 0.00
-		else 
+		else:
 			return self.bids[0].get_bidding_price()
 
 	def get_lowest_bid_price(self):
 		# Assumes, we have already taken stock of the item
 		if self.get_number_of_bids() == 0:
 			return 0.00
-		else 
+		else:
 			return self.bids[-1].get_bidding_price()
 
 	def get_price_paid(self):
@@ -86,11 +89,11 @@ class Item:
 			return 0.00
 		if self.get_number_of_bids() == 1:
 			return self.get_reserved_price()
-		else 
+		else:
 			return self.bids[1].get_bidding_price()
 
 	def get_winner(self):
 		if self.get_number_of_bids() == 0:
 			return ''
-		else 
+		else:
 			return self.bids[0].get_bidder_id()

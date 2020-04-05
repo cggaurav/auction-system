@@ -7,7 +7,7 @@ def test_if_bid_is_valid_for_same_item_and_bidder_within_auction_time():
 	item = Item(1, 1, 'book1', 10, 100)
 
 	bid0 = Bid(1, 2, 9, item)
-	assert bid0.is_valid(item) == False
+	assert bid0.is_valid(item) == True
 
 	bid1 = Bid(1, 2, 10, item)
 	assert bid1.is_valid(item) == True

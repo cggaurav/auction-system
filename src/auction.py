@@ -38,7 +38,7 @@ class Auction:
 		bidder_id = int(command[1])
 		bidding_price = float(command[4])
 
-		item = Item.get_item_by_name(item_name)
+		item = self.get_item_by_name(item_name)
 
 		bid = Bid(bidding_time, bidder_id, bidding_price, item)
 
@@ -53,26 +53,28 @@ class Auction:
 
 		item = Item(auction_start_time, seller_id, item_name, reserved_price, auction_end_time)
 
-		self.items.append(item)
+		self.add_item(item)
 
 	def processOutput(self):
 		self.take_stock()
 
 		for item in self.items:
-			print(item.get_auction_end_time(), '|', item.get_name(), '|', item.get_winner(), '|', item.get_status(), '|'
+			print(item.get_auction_end_time(), '|', item.get_name(), '|', item.get_winner(), '|', item.get_status(), '|',
 				item.get_price_paid(), '|', item.get_number_of_bids(), '|', item.get_highest_bid_price(), '|', item.get_lowest_bid_price())
 
 	def take_stock(self, time=float('inf')):
 		for item in self.items:
 				item.take_stock(time)
 
+	def add_item(self, item):
+		self.items.append(item)
+
 	def get_item_by_name(self, name):
 		for item in self.items:
 			if item.get_name() == name:
 				break
 			# Here return should end the function http://www.compciv.org/guides/python/fundamentals/function-definitions/
-			return item
-		return None
+		return item
 
 
 

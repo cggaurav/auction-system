@@ -49,8 +49,8 @@ class Bid:
 	# If two bids are received for the same amount then the earliest bid wins the item.
 	def is_valid(self, item):
 		if (self.get_bidding_time() >= item.get_auction_start_time() and self.get_bidding_time() <= item.get_auction_end_time()) and \
-		   (self.bidding_price >= self.get_largest_bid_for_bidder(self.get_bidder_id())) and \
-		   (self.bidding_price >= item.get_reserved_price()):
+		   (self.bidding_price >= self.get_largest_bid_for_bidder(self.get_bidder_id())):
+		   # (self.bidding_price >= item.get_reserved_price()):
 			return True
 		else:
 			return False
