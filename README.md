@@ -15,7 +15,7 @@
 ## Assumptions Made
 
 1. Reading from an input file, but printing to stdout only.
-2. An item can be sold in an auction only once, that is it appears only once with 'SELL' action.
+2. An item can be sold in an auction only once, that is only the first appearance of 'SELL' for the item is considered and rest ignored.
 3. A user can submit a bid for his or her own item.
 4. All timestamps move in strictly increasing order
 5. A bid can be valid even if the last bid price by the bidder is considered for a different item

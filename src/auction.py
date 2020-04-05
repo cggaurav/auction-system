@@ -50,9 +50,11 @@ class Auction:
 		reserved_price = command[4]
 		auction_end_time = command[5]
 
-		item = Item(auction_start_time, seller_id, item_name, reserved_price, auction_end_time)
+		if not self.item_exists(item_name):
 
-		self.add_item(item)
+			item = Item(auction_start_time, seller_id, item_name, reserved_price, auction_end_time)
+
+			self.add_item(item)
 
 	def processOutput(self):
 		self.take_stock()
@@ -76,12 +78,23 @@ class Auction:
 	def add_item(self, item):
 		self.items.append(item)
 
+	def get_items(self):
+		return self.items
+
 	def get_item_by_name(self, name):
 		# Here return should end the function http://www.compciv.org/guides/python/fundamentals/function-definitions/
-		for item in self.items:
-			if item.get_name() == name:
+		item = None
+		for i in self.items:
+			if i.get_name() == name:
+				item = i
 				break
 		return item
+
+	def item_exists(self, name):
+		if self.get_item_by_name(name):
+			return True
+		else:
+			return False
 
 
 

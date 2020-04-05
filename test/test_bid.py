@@ -2,7 +2,6 @@ import pytest
 from src.bid import Bid
 from src.item import Item
 
-
 def test_bid_gets():
 	# A book that starts auction at 1 and ends at 100, with user 1 wanting to sell it for 10
 	item = Item(1, 1, 'book0', 10, 100)
