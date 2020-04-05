@@ -53,7 +53,6 @@ class Item:
         if self.get_number_of_bids() == 0:
             return False
         else:
-            # Docs for sorting 
             from functools import cmp_to_key
 
             def compare(bid1, bid2):
@@ -104,9 +103,11 @@ class Item:
         if self.is_not_sold():
             return 0
         else:
+            # Here there is just one valid bid greater than or equal to reserved price
             if self.get_number_of_bids() == 1:
                 return self.get_reserved_price()
             else:
+                # The second highest price here should be the reserved price instead of something lower
                 return max(self.get_reserved_price(), self.bids[1].get_bidding_price())
 
     def get_winner(self):

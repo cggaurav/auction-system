@@ -33,9 +33,11 @@ OR
 1. Check if local environment is setup well to run python
 2. Break out bidder/seller into a user class
 3. Better validation, eg bids are non zero, items names are lowercase for uniqueness, auction end time is greater than start time, etc
+4. Algorithmic Inmprovements, eg not sorting again when adding a new item to list, but inserting it effeciently
 
 ## Notes
 
 ### Python Basics
 
 #### On structuring application [link](https://www.kennethreitz.org/essays/repository-structure-and-python)
+#### On custom sorting [link](https://portingguide.readthedocs.io/en/latest/comparisons.html)

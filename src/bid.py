@@ -28,7 +28,6 @@ class Bid:
 
     @classmethod
     def get_largest_bid_for_bidder(cls, bidder_id):
-        # Docs for sorting 
         from functools import cmp_to_key
         def compare(bid1, bid2):
             if bid1.get_bidding_price() > bid2.get_bidding_price():
@@ -56,7 +55,6 @@ class Bid:
     def is_valid(self, item):
         if (self.get_bidding_time() >= item.get_auction_start_time() and self.get_bidding_time() <= item.get_auction_end_time()) and \
            (self.get_bidding_price() >= self.get_largest_bid_for_bidder(self.get_bidder_id())):
-           # (self.bidding_price >= item.get_reserved_price()):
             return True
         else:
             return False
