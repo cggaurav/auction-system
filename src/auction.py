@@ -22,13 +22,12 @@ class Auction:
 			elif len(command_delimited) == 6 and command_delimited[2] == 'SELL':
 				self.processSell(command_delimited)
 			else:
-				pass
+				logging.error('Unknown input', command)
 
 	def processHeartBeat(self, command):
 		print('processHeartBeat', command)
 		time = int(command[0])
 		self.take_stock(time)
-		pass
 
 	def processBid(self, command):
 		print('processBid', command) # eg ['12', '8', 'BID', 'toaster_1', '7.50']
@@ -61,7 +60,7 @@ class Auction:
 
 		for item in self.items:
 			print(item.get_auction_end_time(), '|', item.get_name(), '|', item.get_winner(), '|', item.get_status(), '|'
-				item.get_second_highest_bid_price(), '|', item.get_number_of_bids(), '|', item.get_highest_bid_price(), '|', item.get_lowest_bid_price())
+				item.get_price_paid(), '|', item.get_number_of_bids(), '|', item.get_highest_bid_price(), '|', item.get_lowest_bid_price())
 
 	def take_stock(self, time=float('inf')):
 		for item in self.items:

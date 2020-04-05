@@ -18,6 +18,7 @@
 3. Same user can submit a bid for his or her own item.
 4. All timestamps move in increasing order
 5. A bid can be valid even if the last bid price by the bidder is considered for a different item
+6. Two bids don't come at the same time.
 
 
 ## Improvements
