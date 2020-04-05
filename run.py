@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
         input_file_commands = input_file.read()
         input_file.close()
+
+        run(input_file_commands)
     else:
         logging.error("Give an input file to start off with.")
-
-    run(input_file_commands)
