@@ -35,6 +35,10 @@ OR
 3. Better validation, eg bids are non zero, items names are lowercase for uniqueness, auction end time is greater than start time, etc
 4. Algorithmic Inmprovements, eg not sorting again when adding a new item to list, but inserting it effeciently
 
+## Caveats
+
+In the problem statement, if the item is `UNSOLD` price paid is expected to be `0.00` and the example output actually says `0`. `20|tv_1||UNSOLD|0|2|200.00|150.00`
+
 ## Notes
 
 ### Python Basics
