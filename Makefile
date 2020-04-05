@@ -3,3 +3,5 @@ run-sample:
 
 test:
 	pytest
+
+.PHONY: all test clean
