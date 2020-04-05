@@ -78,7 +78,7 @@ class Item:
 
     # Take stock of item, to see if it can be sold based on current bids and auction end time
     def take_stock(self, time=float('inf')):
-
+        # Enhancement: Can be optimized to not run again for the second time for the same item
         if self.is_not_sold() and time >= self.get_auction_end_time() and self.can_be_sold():
             self.set_as_sold()
 

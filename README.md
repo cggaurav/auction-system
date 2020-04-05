@@ -16,6 +16,10 @@ OR
 
 `make test`
 
+## Schema
+ 
+![Schema](https://cdn-std.droplr.net/files/acc_279689/Gy5hLm "Schema")
+
 ## Assumptions Made
 
 1. Reading from an input file, but printing to stdout only.
