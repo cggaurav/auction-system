@@ -26,9 +26,8 @@ class Auction:
 
 	def processHeartBeat(self, command):
 		# print('processHeartBeat', command)
-		# time = int(command[0])
-		# self.take_stock(time)
-		pass
+		time = int(command[0])
+		self.take_stock(time)
 
 	def processBid(self, command):
 		# print('processBid', command) # eg ['12', '8', 'BID', 'toaster_1', '7.50']
