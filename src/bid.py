@@ -13,6 +13,8 @@ class Bid:
 		if self.is_valid(item):
 			self.add_bid_for_bidder(self.get_bidder_id())
 			item.add_bid(self)
+		else:
+			pass
 
 
 	def get_bidding_price(self):

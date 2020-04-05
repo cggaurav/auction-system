@@ -32,10 +32,9 @@ class Auction:
 	def processBid(self, command):
 		# print('processBid', command) # eg ['12', '8', 'BID', 'toaster_1', '7.50']
 
-		item_name = command[3]
-
 		bidding_time = command[0]
 		bidder_id = command[1]
+		item_name = command[3]
 		bidding_price = command[4]
 
 		item = self.get_item_by_name(item_name)
