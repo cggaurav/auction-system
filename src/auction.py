@@ -3,9 +3,8 @@ from src.item import Item
 
 from src.utils.logger import logger
 
-# An auction is a facility to sell and buy items through bids
 class Auction:
-
+	"""An auction is a facility to sell and buy items through bids"""
 	def __init__(self):
 		self.items = []
 
@@ -89,7 +88,6 @@ class Auction:
 		return self.items
 
 	def get_item_by_name(self, name):
-		# Here return should end the function http://www.compciv.org/guides/python/fundamentals/function-definitions/
 		item = None
 		for i in self.items:
 			if i.get_name() == name:

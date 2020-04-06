@@ -1,7 +1,7 @@
 from src.utils.logger import logger
 
 class Bid:
-    # Class Variable
+    """An bid belongs to an item, is placed by a bidder with a price and time"""
     bids_by_bidder = {}
 
     def __init__(self, bidding_time, bidder_id, bidding_price, item):

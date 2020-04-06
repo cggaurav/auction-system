@@ -3,7 +3,6 @@ import pytest
 from src.item import Item
 from src.bid import Bid
 
-
 def test_item_gets_with_no_bids():
 	item = Item(1, 1, 'item0', 10.35, 100)
 

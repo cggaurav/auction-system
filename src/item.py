@@ -1,10 +1,8 @@
 from src.bid import Bid
 from src.utils.logger import logger
-# An item has a unique name and reserved price.
-# To buy an item, participants must submit bids with
-# a price higher than the reserved price.
-# eg 10|1|SELL|toaster_1|10.00|20
+
 class Item:
+    """An item is auctioned with a start and end time, and is bought with a bid"""
     def __init__(self, auction_start_time, seller_id, name, reserved_price, auction_end_time):
         self.name = name
         self.reserved_price = float(reserved_price)

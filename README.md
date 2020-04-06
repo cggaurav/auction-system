@@ -51,3 +51,4 @@ In the problem statement, if the item is `UNSOLD` price paid is expected to be `
 
 #### On structuring application [link](https://www.kennethreitz.org/essays/repository-structure-and-python)
 #### On custom sorting [link](https://portingguide.readthedocs.io/en/latest/comparisons.html)
+#### On return values of functions [link](http://www.compciv.org/guides/python/fundamentals/function-definitions/)
