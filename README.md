@@ -18,7 +18,7 @@ OR
 
 ## Schema
  
-![Schema](https://cdn-std.droplr.net/files/acc_279689/Gy5hLm "Schema" =250x)
+![Schema](https://cdn-std.droplr.net/files/acc_279689/Gy5hLm "Schema" )
 
 ## Assumptions Made
 
