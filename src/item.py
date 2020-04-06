@@ -73,9 +73,9 @@ class Item:
             else:
                 return False
 
-    # Take stock of item, to see if it can be sold based on current bids and auction end time
     def take_stock(self, time=float('inf')):
-        # Enhancement: Can be optimized to not run again for the second time for the same item
+        # Take stock of item, to see if it can be sold based on current bids and auction end time
+        # TODO: Can be optimized to not run again for the second time for the same item
         if self.is_not_sold() and time >= self.get_auction_end_time() and self.can_be_sold():
             self.set_as_sold()
 
@@ -93,9 +93,10 @@ class Item:
         else:
             return self.bids[-1].get_bidding_price()
 
-    # At the end of the auction the winner will pay the price of the second highest bidder, if there
-    # is only a single valid bid they will pay the reserve price of the auction.
+    
     def get_price_paid(self):
+        # At the end of the auction the winner will pay the price of the second highest bidder, if there 
+        # is only a single valid bid they will pay the reserve price of the auction.
         # Assumes, we have already taken stock of the item
         if self.is_not_sold():
             return 0

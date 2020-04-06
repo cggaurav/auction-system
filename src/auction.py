@@ -9,7 +9,6 @@ class Auction:
 		self.items = []
 
 	def processInput(self, lines):
-
 		commands = lines.strip().split('\n')
 		for command in commands:
 			command_delimited = command.strip().split('|')
@@ -21,7 +20,7 @@ class Auction:
 			elif len(command_delimited) == 6 and command_delimited[2] == 'SELL':
 				self.processSell(command_delimited)
 			else:
-				logging.error('Unknown input {}'.format(command))
+				logger.error('Unknown input {}'.format(command))
 
 	def processHeartBeat(self, command):
 		# logger.info('processHeartBeat {}'.format(command))
@@ -30,7 +29,6 @@ class Auction:
 
 	def processBid(self, command):
 		# logger.info('processBid {}'.format(command)) # eg ['12', '8', 'BID', 'toaster_1', '7.50']
-
 		bidding_time = command[0]
 		bidder_id = command[1]
 		item_name = command[3]
@@ -42,7 +40,6 @@ class Auction:
 
 	def processSell(self, command):
 		# logger.info('processSell {}'.format(command)) # eg ['10', '1', 'SELL', 'toaster_1', '10.00', '20']
-
 		auction_start_time = command[0]
 		seller_id = command[1]
 		item_name = command[3]
@@ -79,7 +76,7 @@ class Auction:
 
 	def take_stock(self, time=float('inf')):
 		for item in self.items:
-				item.take_stock(time)
+			item.take_stock(time)
 
 	def add_item(self, item):
 		self.items.append(item)
@@ -88,6 +85,7 @@ class Auction:
 		return self.items
 
 	def get_item_by_name(self, name):
+		# For all the items that exist in the auction, get the item by its unique name
 		item = None
 		for i in self.items:
 			if i.get_name() == name:
@@ -96,6 +94,7 @@ class Auction:
 		return item
 
 	def item_exists(self, name):
+		# Check if an item already exists in the auction
 		if self.get_item_by_name(name):
 			return True
 		else:

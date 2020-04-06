@@ -5,7 +5,6 @@ class Bid:
     bids_by_bidder = {}
 
     def __init__(self, bidding_time, bidder_id, bidding_price, item):
-        # eg 17|8|BID|toaster_1|20.00
         self.bidding_time = int(bidding_time)
         self.bidder_id = int(bidder_id)
         self.bidding_price = float(bidding_price)
@@ -14,8 +13,8 @@ class Bid:
             self.add_bid_for_bidder(self.get_bidder_id())
             item.add_bid(self)
         else:
+            logger.warn('Not a valid bid {}'.format(self))
             pass
-
 
     def get_bidding_price(self):
         return self.bidding_price
@@ -48,11 +47,11 @@ class Bid:
         else:
             Bid.bids_by_bidder[bidder_id] = [self]
 
-    # A bid is considered valid if it:
-    #   * Arrives after the auction start time and before or on the closing time.
-    #   * Is larger than any previous valid bids submitted by the bidder.
-    # If two bids are received for the same amount then the earliest bid wins the item.
     def is_valid(self, item):
+        # A bid is considered valid if it:
+        #   * Arrives after the auction start time and before or on the closing time.
+        #   * Is larger than any previous valid bids submitted by the bidder.
+        # If two bids are received for the same amount then the earliest bid wins the item.
         if (self.get_bidding_time() >= item.get_auction_start_time() and self.get_bidding_time() <= item.get_auction_end_time()) and \
            (self.get_bidding_price() >= self.get_largest_bid_for_bidder(self.get_bidder_id())):
             return True

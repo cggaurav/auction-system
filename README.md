@@ -39,7 +39,6 @@ OR
 3. Break out bidder/seller into its own User class, that can manage bids associated with a user.
 4. Better validation, eg bids are non zero, items names are lowercase for uniqueness, auction end time is greater than start time, etc
 5. Algorithmic Inmprovements, eg not sorting again when adding a new item to list, but inserting it effeciently
-6. Better error handling and tests.
 
 ## Notes
 
