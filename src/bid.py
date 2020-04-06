@@ -13,7 +13,7 @@ class Bid:
             self.add_bid_for_bidder(self.get_bidder_id())
             item.add_bid(self)
         else:
-            logger.warn('Not a valid bid {}'.format(self))
+            logger.warn('Not a valid bid at {} from {} for {}'.format(self.bidding_time, self.bidder_id, self.bidding_price))
             pass
 
     def get_bidding_price(self):
