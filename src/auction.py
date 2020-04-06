@@ -23,7 +23,7 @@ class Auction:
 				logger.error('Unknown input {}'.format(command))
 
 	def processHeartBeat(self, command):
-		# logger.info('processHeartBeat {}'.format(command))
+		# logger.info('processHeartBeat {}'.format(command)) # eg ['12']
 		time = int(command[0])
 		self.take_stock(time)
 
