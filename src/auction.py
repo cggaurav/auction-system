@@ -1,7 +1,7 @@
 from src.bid import Bid
 from src.item import Item
 
-import logging
+from src.utils.logger import logger
 
 # An auction is a facility to sell and buy items through bids
 class Auction:
@@ -22,15 +22,15 @@ class Auction:
 			elif len(command_delimited) == 6 and command_delimited[2] == 'SELL':
 				self.processSell(command_delimited)
 			else:
-				logging.error('Unknown input', command)
+				logging.error('Unknown input {}'.format(command))
 
 	def processHeartBeat(self, command):
-		# print('processHeartBeat', command)
+		# logger.info('processHeartBeat {}'.format(command))
 		time = int(command[0])
 		self.take_stock(time)
 
 	def processBid(self, command):
-		# print('processBid', command) # eg ['12', '8', 'BID', 'toaster_1', '7.50']
+		# logger.info('processBid {}'.format(command)) # eg ['12', '8', 'BID', 'toaster_1', '7.50']
 
 		bidding_time = command[0]
 		bidder_id = command[1]
@@ -42,7 +42,7 @@ class Auction:
 		bid = Bid(bidding_time, bidder_id, bidding_price, item)
 
 	def processSell(self, command):
-		# print('processSell', command) # eg ['10', '1', 'SELL', 'toaster_1', '10.00', '20']
+		# logger.info('processSell {}'.format(command)) # eg ['10', '1', 'SELL', 'toaster_1', '10.00', '20']
 
 		auction_start_time = command[0]
 		seller_id = command[1]
@@ -55,6 +55,8 @@ class Auction:
 			item = Item(auction_start_time, seller_id, item_name, reserved_price, auction_end_time)
 
 			self.add_item(item)
+		else:
+			logger.warning('Item already exists {}'.format(item_name))
 
 	def processOutput(self):
 		self.take_stock()

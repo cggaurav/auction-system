@@ -1,4 +1,4 @@
-import logging
+from src.utils.logger import logger
 
 class Bid:
     # Class Variable

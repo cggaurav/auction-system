@@ -1,6 +1,5 @@
 from src.bid import Bid
-
-import logging
+from src.utils.logger import logger
 # An item has a unique name and reserved price.
 # To buy an item, participants must submit bids with
 # a price higher than the reserved price.
