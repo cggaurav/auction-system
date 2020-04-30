@@ -1,8 +1,8 @@
 from src.utils.logger import logger
 
 class Bid:
-    """An bid belongs to an item, is placed by a bidder with a price and time"""
-    bids_by_bidder = {}
+    """A bid belongs to an item, is placed by a bidder with a price and time"""
+    bids_by_bidder = {} # Segments bids by a specific bidder
 
     def __init__(self, bidding_time, bidder_id, bidding_price, item):
         self.bidding_time = int(bidding_time)
@@ -31,6 +31,16 @@ class Bid:
         else:
             Bid.bids_by_bidder[bidder_id] = [self]
 
+    def is_valid(self, item):
+        # A bid is considered valid if it:
+        #   * Arrives after the auction start time and before or on the closing time.
+        #   * Is larger than any previous valid bids submitted by the bidder.
+        if (self.get_bidding_time() >= item.get_auction_start_time() and self.get_bidding_time() <= item.get_auction_end_time()) and \
+           (self.get_bidding_price() >= self.get_largest_bid_for_bidder(self.get_bidder_id())):
+            return True
+        else:
+            return False
+
     @classmethod
     def get_largest_bid_for_bidder(cls, bidder_id):
         from functools import cmp_to_key
@@ -46,13 +56,3 @@ class Bid:
             return sorted(cls.bids_by_bidder[bidder_id], key=cmp_to_key(compare))[0].get_bidding_price() # Note: Can be improved for performance
         else:
             return 0
-
-    def is_valid(self, item):
-        # A bid is considered valid if it:
-        #   * Arrives after the auction start time and before or on the closing time.
-        #   * Is larger than any previous valid bids submitted by the bidder.
-        if (self.get_bidding_time() >= item.get_auction_start_time() and self.get_bidding_time() <= item.get_auction_end_time()) and \
-           (self.get_bidding_price() >= self.get_largest_bid_for_bidder(self.get_bidder_id())):
-            return True
-        else:
-            return False
