@@ -31,6 +31,7 @@ OR
 7. A bid is valid even if its bidding price is below the reserved price, however an item will not be sold below the reserved price. If this is the only bid for the item, the highest and lowest bid will be this same value and the item will not be sold.
 8. If there are no bids for an item, the highest and lowest bid price will be 0.00 and not 0. In the problem statement, if the item is `UNSOLD` price paid is expected to be `0.00` and the example output actually says `0`.eg `20|tv_1||UNSOLD|0|2|200.00|150.00`
 9. Highest and lowest bids will be based on valid bids. eg. If an a invalid bid for item comes, say after auction end time of item , it will not be considered.
+10. Number of bids in the output is the number of valid bids.
 
 ## Improvements To Make
 

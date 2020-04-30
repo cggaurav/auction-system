@@ -2,7 +2,7 @@ from src.utils.logger import logger
 
 class Bid:
     """A bid belongs to an item, is placed by a bidder with a price and time"""
-    bids_by_bidder = {} # Segments bids by a specific bidder
+    bids_by_bidder = {} # Segments bids by a specific bidder 
 
     def __init__(self, bidding_time, bidder_id, bidding_price, item):
         self.bidding_time = int(bidding_time)
