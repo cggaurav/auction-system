@@ -13,7 +13,7 @@ class Item:
         # To start off with the item is not sold yet
         self.status = 'UNSOLD'
 
-        # Stores all the valid bids for an item. Even if there is one valid bid, the item will be sold
+        # Stores all the "valid" bids for an item. 
         self.bids = []
 
     def get_name(self):
@@ -53,21 +53,20 @@ class Item:
             from functools import cmp_to_key
 
             def compare(bid1, bid2):
-
                 if bid1.get_bidding_price() > bid2.get_bidding_price():
                     return -1
                 elif bid1.get_bidding_price() == bid2.get_bidding_price():
-                    if bid1.get_bidding_time() > bid2.get_bidding_time(): # Note: Won't be equal, as assumed
+                    if bid1.get_bidding_time() > bid2.get_bidding_time(): # Note: Won't be equal, as assumed  
                         return -1
                     else:
-                        return 1
+                        return 1 # If two bids are received for the same amount then the earliest bid wins the item.
                 else:
                     return 1
 
             # Sort all bids for item based on highest bid price to loweest bid price
             self.bids.sort(key=cmp_to_key(compare))
 
-            # If the highest bid price is greater than the reserved price, item can be sold
+            # If the highest bid price is greater or equal to the reserved price, item can be sold
             if self.bids[0].get_bidding_price() >= self.get_reserved_price():
                 return True
             else:
@@ -75,24 +74,29 @@ class Item:
 
     def take_stock(self, time=float('inf')):
         # Take stock of item, to see if it can be sold based on current bids and auction end time
-        # TODO: Can be optimized to not run again for the second time for the same item
+        # TODO: Can be optimized to not run again for the second time for the same item if its been considered before
         if self.is_not_sold() and time >= self.get_auction_end_time() and self.can_be_sold():
             self.set_as_sold()
 
+    def get_winner(self):
+        if self.is_not_sold():
+            return ''
+        else:
+            return self.bids[0].get_bidder_id()
+
     def get_highest_bid_price(self):
-        # Assumes, we have already taken stock of the item
+        # Assumes, we have already taken stock of the item, and bids are sorted
         if self.get_number_of_bids() == 0:
             return 0
         else:
             return self.bids[0].get_bidding_price()
 
     def get_lowest_bid_price(self):
-        # Assumes, we have already taken stock of the item
+        # Assumes, we have already taken stock of the item, and bids are sorted
         if self.get_number_of_bids() == 0:
             return 0
         else:
             return self.bids[-1].get_bidding_price()
-
     
     def get_price_paid(self):
         # At the end of the auction the winner will pay the price of the second highest bidder, if there 
@@ -107,10 +111,4 @@ class Item:
             else:
                 # The second highest price here should be the reserved price instead of something lower
                 return max(self.get_reserved_price(), self.bids[1].get_bidding_price())
-
-    def get_winner(self):
-        if self.is_not_sold():
-            return ''
-        else:
-            return self.bids[0].get_bidder_id()
             

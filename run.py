@@ -13,6 +13,7 @@ def run(input_file_commands):
     auction.processOutput()
 
 if __name__ == '__main__':
+    # Assumed only file as input.
     input_file_path = sys.argv[1] if len(sys.argv) > 1 else None
 
     if input_file_path:

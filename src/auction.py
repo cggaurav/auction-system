@@ -28,7 +28,7 @@ class Auction:
 		self.take_stock(time)
 
 	def processBid(self, command):
-		# logger.info('processBid {}'.format(command)) # eg ['12', '8', 'BID', 'toaster_1', '7.50']
+		# logger.info('processBid {}'.format(command)) # eg ['12', '8', 'BID', 'toaster_1', '7.50'] # 12|8|BID|toaster_1|7.50
 		bidding_time = command[0]
 		bidder_id = command[1]
 		item_name = command[3]
@@ -39,7 +39,7 @@ class Auction:
 		bid = Bid(bidding_time, bidder_id, bidding_price, item)
 
 	def processSell(self, command):
-		# logger.info('processSell {}'.format(command)) # eg ['10', '1', 'SELL', 'toaster_1', '10.00', '20']
+		# logger.info('processSell {}'.format(command)) # eg ['10', '1', 'SELL', 'toaster_1', '10.00', '20'] # 10|1|SELL|toaster_1|10.00|20
 		auction_start_time = command[0]
 		seller_id = command[1]
 		item_name = command[3]
@@ -47,15 +47,13 @@ class Auction:
 		auction_end_time = command[5]
 
 		if not self.item_exists(item_name):
-
 			item = Item(auction_start_time, seller_id, item_name, reserved_price, auction_end_time)
-
 			self.add_item(item)
 		else:
 			logger.warning('Item already exists {}'.format(item_name))
 
 	def processOutput(self):
-		self.take_stock()
+		self.take_stock() # Note: The acution is closed, lets take a last stock of all items
 
 		outputs = []
 		for item in self.items:
@@ -73,10 +71,6 @@ class Auction:
 			outputs.append(output)
 
 		return outputs
-
-	def take_stock(self, time=float('inf')):
-		for item in self.items:
-			item.take_stock(time)
 
 	def add_item(self, item):
 		self.items.append(item)
@@ -100,5 +94,7 @@ class Auction:
 		else:
 			return False
 
-
+	def take_stock(self, time=float('inf')):
+		for item in self.items:
+			item.take_stock(time)
 
