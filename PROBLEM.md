@@ -1,4 +1,4 @@
-# THOUGHT MACHINE Programming Test - Auction House
+# Problem Set
 
 Requirements:
  - Please complete the following programming exercise. Allow for about 4-6 hours.
